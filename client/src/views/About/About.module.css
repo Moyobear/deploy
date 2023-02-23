@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Carter+One&family=Sniglet:wght@800&display=swap");
+
+.contAbout {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-image: url("../../Imgs/about2.jpg");
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: 100% 50%;
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+.info {
+  width: 45rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  border: 1.5px solid rgba(209, 213, 219, 0.3);
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.texto {
+  width: 20rem;
+}
+
+.imagen {
+  width: 20rem;
+  border-bottom-left-radius: 1rem;
+  border-top-left-radius: 1rem;
+}
+.acerca {
+  color: white;
+  font-size: 1.5rem;
+  font-family: "Carter One", cursive;
+  text-shadow: 2px 2px 5px rgb(0, 0, 0);
+  margin: 0;
+}
+
+.palabras {
+  overflow-wrap: break-word;
+  font-family: "Ubuntu", cursive;
+}
+
+.nombre {
+  color: rgb(255, 0, 0);
+  font-family: "Carter One", cursive;
+  -webkit-text-stroke: 1px rgb(0, 0, 0);
+  text-shadow: 2px 2px 5px rgb(0, 0, 0);
+  text-align: right;
+}
+
+@media screen and (max-width: 1050px) {
+  .info {
+    margin: 3rem auto;
+    align-items: center;
+    width: 20rem;
+    flex-direction: column;
+    height: 90vh;
+  }
+  .imagen {
+    width: 20rem;
+    border-top-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 0;
+    margin-bottom: 0;
+  }
+}
