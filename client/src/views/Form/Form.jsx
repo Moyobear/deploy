@@ -107,7 +107,7 @@ export default function Form() {
       dispatch(updateHome());
 
       await axios
-        .post("http://localhost:3001/pokemons", pokemonData)
+        .post("/pokemons", pokemonData)
         .then((res) => {
           datos = res.data;
         })

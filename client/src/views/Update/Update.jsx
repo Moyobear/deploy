@@ -59,7 +59,7 @@ export default function Update() {
     dispatch(updateHome());
 
     await axios
-      .put("http://localhost:3001/pokemons", info)
+      .put("/pokemons", info)
       .then((res) => {
         console.log(res.data);
       })

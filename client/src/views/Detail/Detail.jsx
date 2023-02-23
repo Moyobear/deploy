@@ -44,9 +44,7 @@ export default function Detail() {
               <h2 className={style.nombre}>{detail.name}</h2>
               <h2 className={style.id}>
                 Id:{" "}
-                {typeof detail.id !== "number"
-                  ? "Base de datos"
-                  : detail.id}
+                {typeof detail.id !== "number" ? "Base de datos" : detail.id}
               </h2>
             </div>
 
