@@ -1,5 +1,4 @@
 .contenedorHome {
-  padding: 0 6rem;
   width: 70%;
   margin: 0 auto;
   margin-bottom: 3rem;
@@ -32,8 +31,9 @@
 }
 
 .recarga {
-  top: 17rem;
-  left: 10rem;
+  top: 6rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
   color: white;
   background-color: black;
   cursor: pointer;

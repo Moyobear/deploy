@@ -53,7 +53,7 @@ export default function Home() {
       ) : (
         ""
       )}
-      <Filter active={active} />
+      <Filter active={active} setActive={setActive} />
 
       <CardsContainer page={page} poksXpage={poksXpage} />
       {pokemons.length <= 1 || pokemons.length < 12 ? null : (

@@ -9,7 +9,7 @@ import {
 } from "../../redux/actions";
 import style from "./Filter.module.css";
 
-export default function Filter({ active }) {
+export default function Filter({ active, setActive }) {
   const dispatch = useDispatch();
   const [reset, setReset] = useState({
     Tipo: "",
@@ -19,6 +19,7 @@ export default function Filter({ active }) {
   });
 
   function handlerFilterType(e) {
+    setActive(!active);
     dispatch(filterType(e.target.value));
     setReset({
       Tipo: e.target.value,
@@ -29,6 +30,7 @@ export default function Filter({ active }) {
   }
 
   function handlerFilterOrigen(e) {
+    setActive(!active);
     dispatch(filterOrigen(e.target.value));
     setReset({
       Tipo: "",
@@ -39,6 +41,7 @@ export default function Filter({ active }) {
   }
 
   function handlerFilterAlf(e) {
+    setActive(!active);
     dispatch(ordenAlfabetico(e.target.value));
     setReset({
       Tipo: "",
@@ -49,6 +52,7 @@ export default function Filter({ active }) {
   }
 
   function handlerFilterAtaq(e) {
+    setActive(!active);
     dispatch(ordenAtaque(e.target.value));
     setReset({
       Tipo: "",
@@ -59,6 +63,7 @@ export default function Filter({ active }) {
   }
 
   function resetFilter(e) {
+    setActive(!active);
     setReset({
       Tipo: "",
       Origen: "",
@@ -143,7 +148,9 @@ export default function Filter({ active }) {
           <option value="mayor">Más fuerte</option>
         </select>
       </div>
-      <button className={style.reset} onClick={(e) => resetFilter(e)}>Reset</button>
+      <button className={style.reset} onClick={(e) => resetFilter(e)}>
+        Reset
+      </button>
     </div>
   );
 }
