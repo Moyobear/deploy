@@ -30,6 +30,15 @@
   text-shadow: 8px 8px 10px #4e31aa;
 }
 
+@media screen and (max-width: 768px) {
+  .numero {
+    display: none;
+  }
+  .contPage {
+    gap: 3rem;
+  }
+}
+
 .anterior::before,
 .previo::before {
   content: "";

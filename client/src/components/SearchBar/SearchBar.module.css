@@ -1,18 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+
 .busquedaContenedor {
   display: flex;
   flex-direction: row;
-  margin: 1rem auto;
+  margin: 1rem 0;
   align-items: center;
 }
 
 .inputSearch {
-  font-family: "Ubuntu", cursive;
-  width: 15rem;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  width: 14rem;
   border: none;
   outline: none;
   font-size: 1rem;
   height: 2.8rem;
   padding-left: 0.8rem;
+}
+
+@media screen and (max-width: 1050px) {
+  .inputSearch {
+    width: 8rem;
+  }
 }
 
 .iconSearch {

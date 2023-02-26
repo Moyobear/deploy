@@ -38,7 +38,7 @@ export default function SearchBar() {
         type="search"
         value={request}
         onChange={handleChange}
-        placeholder="Buscar pokemon..."
+        placeholder="Buscar..."
       />
       <button className={style.btnSearch} onClick={(e) => onSearch(e)}>
         Buscar

@@ -46,6 +46,20 @@ export const clearDetail = () => {
   };
 };
 
+export const createPokemon = (data) => {
+  return async function (dispatch) {
+    const create = await axios.post("/pokemons", data)
+    return create
+  };
+};
+
+export const updatePokemon = (data) => {
+  return async function (dispatch) {
+    const update = await axios.put("/pokemons", data)
+    return update
+  };
+};
+
 export const deletePokemon = (id) => {
   return async function (dispatch) {
     await axios.delete(`/pokemons/${id}/delete`);
@@ -61,9 +75,7 @@ export const clearHome = () => {
 
 export const searchByName = (name) => {
   return async function (dispatch) {
-    const apiData = await axios.get(
-      `/pokemons?name=${name}`
-    );
+    const apiData = await axios.get(`/pokemons?name=${name}`);
     const detail = apiData.data;
     dispatch({ type: SEARCH_BY_NAME, payload: detail });
   };

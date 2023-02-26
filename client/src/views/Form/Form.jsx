@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import pokebola from "../../Imgs/pokeball.png";
 import style from "./Form.module.css";
-import axios from "axios";
-import { getAllTypes, updateHome } from "../../redux/actions";
+import { getAllTypes, updateHome, createPokemon } from "../../redux/actions";
 import Loadding from "../../components/Loadding/Loadding";
 import Modal from "../../components/Modal/Modal";
+import validate from "./validations";
 
 export default function Form() {
   const [image, setImage] = useState("");
@@ -23,10 +23,8 @@ export default function Form() {
     speed: 50,
     height: 50,
     weight: 50,
-    image: "",
     type: [],
   });
-  let datos;
 
   const [errors, setErrors] = useState({
     name: "",
@@ -36,6 +34,14 @@ export default function Form() {
   useEffect(() => {
     dispatch(getAllTypes());
   }, [dispatch]);
+
+  function getImage(e) {
+    e.preventDefault();
+    let value = Math.floor(Math.random() * 100);
+    let url = `https://lorempokemon.fakerapi.it/pokemon/400/${value}`;
+    setImage(url);
+    return url;
+  }
 
   function changeHandler(e) {
     setErrors(
@@ -54,24 +60,8 @@ export default function Form() {
   function selectHandler(e) {
     setPokemonData({
       ...pokemonData,
-      type: [...pokemonData.type, e.target.value.toLowerCase()],
+      type: [...pokemonData.type, e.target.value],
     });
-  }
-
-  function validate(input) {
-    let errors = {};
-    // if (!input.name) errors.name = "El nombre del pokemon es requerido";
-    if (!/[A-Za-z]{3,10}/.test(input.name))
-      errors.name = "El nombre debe tener de 3 a 10 caracteres";
-    if (/[0-9]/.test(input.name))
-      errors.name = "El nombre no puede tener números";
-    if (input.image === "")
-      errors.image = "Debes generar uan imagen y pegarla en el campo de imagen";
-    if (input.type === "") errors.type = "El tipo del pokemon es requerido";
-    if (input.type.length > 2)
-      errors.type = "El pokemón sólo puede tener máximo 2 tipos";
-
-    return errors;
   }
 
   function handleDelete(e) {
@@ -84,6 +74,12 @@ export default function Form() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    let data = {
+      ...pokemonData,
+      image,
+    };
+
+    dispatch(createPokemon(data));
     setActive(!active);
     const arrayErrors = Object.values(errors);
     if (arrayErrors.length === 0) {
@@ -95,7 +91,6 @@ export default function Form() {
         speed: 50,
         height: 50,
         weight: 50,
-        image: "",
         type: [],
       });
 
@@ -105,21 +100,7 @@ export default function Form() {
       });
 
       dispatch(updateHome());
-
-      await axios
-        .post("/pokemons", pokemonData)
-        .then((res) => {
-          datos = res.data;
-        })
-        .catch((error) => alert(error.message));
     }
-  }
-
-  function getImage() {
-    let value = Math.floor(Math.random() * 100);
-    let urlImage = `https://lorempokemon.fakerapi.it/pokemon/400/${value}`;
-    setImage(urlImage);
-    return urlImage;
   }
 
   return (
@@ -159,38 +140,10 @@ export default function Form() {
                 id="name"
                 type="text"
                 value={pokemonData.name}
-                onChange={changeHandler}
+                onChange={(e) => changeHandler(e)}
                 required
               />
               {errors.name && <p className={style.danger}>{errors.name}</p>}
-            </div>
-
-            <div className={style.grupo}>
-              <label className={style.etiquetaRorm} htmlFor="image">
-                Imagen:
-              </label>
-              <input
-                className={style.inputForm}
-                name="image"
-                id="image"
-                type="text"
-                value={pokemonData.image}
-                onChange={changeHandler}
-                required
-              />
-              {image ? (
-                <input
-                  className={style.fake}
-                  name="value_image"
-                  id="value_image"
-                  type="text"
-                  value={image}
-                  readOnly
-                />
-              ) : null}
-              {image ? (
-                <p className={style.info}>copia este enlace y pégalo arriba</p>
-              ) : null}
             </div>
 
             <div className={style.grupo}>
@@ -231,9 +184,7 @@ export default function Form() {
             </div>
 
             <div className={style.mainBotones}>
-              {pokemonData.name &&
-              pokemonData.type.length &&
-              pokemonData.image ? (
+              {pokemonData.name && pokemonData.type.length && image ? (
                 <button className={style.btnCrear} type="submit">
                   Crear Pokemon
                 </button>
@@ -241,7 +192,7 @@ export default function Form() {
                 ""
               )}
 
-              <button className={style.btnImagen} onClick={getImage}>
+              <button className={style.btnImagen} onClick={(e) => getImage(e)}>
                 {!image ? "Generar Imagen" : "Cambiar imágen"}
               </button>
             </div>

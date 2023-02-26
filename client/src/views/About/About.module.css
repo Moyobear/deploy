@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Carter+One&family=Sniglet:wght@800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
 
 .contAbout {
   min-height: 80vh;
@@ -16,7 +17,7 @@
 .info {
   width: 45rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-direction: row;
   flex-wrap: wrap;
   margin: 0 auto;
@@ -47,7 +48,8 @@
 
 .palabras {
   overflow-wrap: break-word;
-  font-family: "Ubuntu", cursive;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 1rem;
 }
 
 .nombre {
@@ -56,14 +58,15 @@
   -webkit-text-stroke: 1px rgb(0, 0, 0);
   text-shadow: 2px 2px 5px rgb(0, 0, 0);
   text-align: right;
+  font-size: 1.5rem;
 }
 
 @media screen and (max-width: 1050px) {
   .info {
     margin: 3rem auto;
+    flex-direction: column;
     align-items: center;
     width: 20rem;
-    flex-direction: column;
     height: 90vh;
   }
   .imagen {

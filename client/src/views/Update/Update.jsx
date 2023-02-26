@@ -3,9 +3,13 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loadding from "../../components/Loadding/Loadding";
-import { getUpdatePokemon, clearUpdate, updateHome } from "../../redux/actions";
+import {
+  getUpdatePokemon,
+  clearUpdate,
+  updateHome,
+  updatePokemon,
+} from "../../redux/actions";
 import style from "./Update.module.css";
-import axios from "axios";
 import Modal from "../../components/Modal/Modal";
 
 export default function Update() {
@@ -47,6 +51,8 @@ export default function Update() {
       id: update.id,
     };
 
+    dispatch(updatePokemon(info));
+
     setActualizar({
       hp: 50,
       attack: 50,
@@ -57,13 +63,6 @@ export default function Update() {
     });
 
     dispatch(updateHome());
-
-    await axios
-      .put("/pokemons", info)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((error) => alert(error.message));
   }
 
   return (
