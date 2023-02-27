@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import style from "./SearchBar.module.css";
 import { searchByName } from "../../redux/actions";
+import { useHistory } from "react-router-dom";
 
 export default function SearchBar() {
   const [request, setRequest] = useState("");
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleChange = (e) => {
     setRequest(e.target.value.toLowerCase());
@@ -15,6 +17,7 @@ export default function SearchBar() {
     e.preventDefault();
     setRequest("");
     dispatch(searchByName(request));
+    history.push("/home");
   }
 
   return (
