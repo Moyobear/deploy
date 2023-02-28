@@ -15,19 +15,20 @@ export default function Home() {
     dispatch(getAllPokemons());
   }, [dispatch]);
 
-  function traerTodos() {
+  function traerTodos(e) {
+    e.preventDefault();
     dispatch(clearHome());
   }
 
   const numPokemons = pokemons?.length;
   const poksXpage = 12;
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
 
   return (
     <div className={style.contenedorHome}>
       {pokemons.length === 1 ? (
         <div>
-          <button className={style.recarga} onClick={traerTodos}>
+          <button className={style.recarga} onClick={(e) => traerTodos(e)}>
             Traer todos
           </button>
         </div>

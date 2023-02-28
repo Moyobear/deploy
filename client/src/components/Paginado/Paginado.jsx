@@ -5,18 +5,22 @@ import { animateScroll as scroll } from "react-scroll";
 export default function Paginado({ page, numPokemons, poksXpage, setPage }) {
   let pages = [];
 
-  for (let i = 1; i < Math.ceil(numPokemons / poksXpage); i++) {
+  for (let i = 0; i < Math.ceil(numPokemons / poksXpage); i++) {
     pages.push(i);
   }
 
   const previus = () => {
     scroll.scrollToTop();
-    setPage(page - 1);
+    let prevPage = page - 1;
+    if (page <= 0) return;
+    setPage(prevPage);
   };
 
   const next = () => {
     scroll.scrollToTop();
-    setPage(page + 1);
+    let newPage = page + 1;
+    if (newPage * poksXpage >= numPokemons) return;
+    setPage(newPage);
   };
 
   const onChange = (e) => {
@@ -39,6 +43,7 @@ export default function Paginado({ page, numPokemons, poksXpage, setPage }) {
           {item}
         </button>
       ))}
+      <em className={style.actual}>{page}</em>
       <button className={style.previo} onClick={next}>
         Next
       </button>

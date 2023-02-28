@@ -22,6 +22,7 @@ const initialState = {
   detail: {},
   update: {},
   types: [],
+  filtered: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -50,6 +51,7 @@ const rootReducer = (state = initialState, action) => {
     case CLEAR_HOME:
       return {
         ...state,
+        filtered: [...state.master],
         pokemons: state.master,
       };
     case UPDATE_HOME:
@@ -72,29 +74,33 @@ const rootReducer = (state = initialState, action) => {
         master: filterDelete,
       };
     case FILTER_TYPE:
-      const copyType = [...state.master];
-      const filterType =
+      state.filtered = [...state.master];
+      state.filtered =
         action.payload === "all"
           ? state.master
-          : copyType.filter((item) => item.type.includes(action.payload));
+          : [...state.master].filter((item) =>
+              item.type.includes(action.payload)
+            );
       return {
         ...state,
-        pokemons: filterType,
+        pokemons: state.filtered,
       };
     case FILTER_ORIGEN:
-      const copyOrigen = [...state.master];
-      const filterOrigen =
+      state.filtered = [...state.master];
+      state.filtered =
         action.payload === "false"
-          ? copyOrigen.filter((item) => !item.inDataBase)
+          ? [...state.master].filter((item) => !item.inDataBase)
           : action.payload === "true"
-          ? copyOrigen.filter((item) => item.inDataBase)
+          ? [...state.master].filter((item) => item.inDataBase)
           : state.master;
       return {
         ...state,
-        pokemons: filterOrigen,
+        pokemons: state.filtered,
       };
     case ORDEN_ALFABETICO:
-      const copyAlf = [...state.master];
+      const copyAlf = state.filtered.length
+        ? state.filtered
+        : [...state.master];
       const filterAlf =
         action.payload === "az"
           ? copyAlf.sort((a, b) => a.name.localeCompare(b.name))
@@ -104,7 +110,9 @@ const rootReducer = (state = initialState, action) => {
         pokemons: filterAlf,
       };
     case ORDEN_ATAQUE:
-      const copyAtaq = [...state.master];
+      const copyAtaq = state.filtered.length
+        ? state.filtered
+        : [...state.master];
       const filterAtaq =
         action.payload === "menor"
           ? copyAtaq.sort((a, b) => a.attack - b.attack)

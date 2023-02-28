@@ -30,10 +30,25 @@
   text-shadow: 8px 8px 10px #4e31aa;
 }
 
+.actual {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   .numero {
     display: none;
   }
+
+  .actual {
+    display: block;
+    color: white;
+    -webkit-text-stroke: 1px rgb(0, 0, 0);
+    font-family: "Pokemon Solid", sans-serif;
+    line-height: 120%;
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+  }
+
   .contPage {
     gap: 3rem;
   }

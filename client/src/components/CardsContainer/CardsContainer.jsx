@@ -17,7 +17,7 @@ export default function CardsContainer({ page, poksXpage }) {
         <Loadding />
       ) : (
         pokemons
-          .slice((page - 1) * poksXpage, (page - 1) * poksXpage + poksXpage)
+          .slice(page * poksXpage, page * poksXpage + poksXpage)
           .map((item) => {
             return (
               <Card
