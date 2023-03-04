@@ -1,9 +1,19 @@
-import { Detail, Form, Home, Landing, About, Update, Page404 } from "./views";
+import {
+  Detail,
+  Form,
+  Home,
+  Landing,
+  About,
+  Update,
+  Page404,
+  SearchPage,
+} from "./views";
 import { Switch, Route, useLocation } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import style from "./styles/App.module.css";
 import axios from "axios";
-axios.defaults.baseURL = "https://deploy-production-d989.up.railway.app";
+axios.defaults.baseURL = "http://localhost:3001";
+// axios.defaults.baseURL = "https://deploy-production-d989.up.railway.app";
 
 function App() {
   const location = useLocation();
@@ -30,6 +40,10 @@ function App() {
 
         <Route exact path="/update/:id">
           <Update />
+        </Route>
+
+        <Route exact path="/searchpage">
+          <SearchPage />
         </Route>
 
         <Route exact path="/about">
