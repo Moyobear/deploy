@@ -15,7 +15,7 @@
 }
 
 .info {
-  width: 45rem;
+  width: 42rem;
   display: flex;
   justify-content: space-evenly;
   flex-direction: row;
@@ -68,7 +68,7 @@
     flex-direction: column;
     align-items: center;
     width: 20rem;
-    height: 95vh;
+    height: 88vh;
   }
   .imagen {
     width: 20rem;

@@ -59,7 +59,7 @@ const getAllPokemons = async () => {
   const dataBasePokemons = await getFromDatabase();
   // *Los de la Api:
   const request = await axios
-    .get("https://pokeapi.co/api/v2/pokemon?limit=100&offset=0")
+    .get("https://pokeapi.co/api/v2/pokemon?limit=150&offset=0")
     .then((res) => res.data.results);
   const subRequest = request.map((item) => axios.get(item.url));
   const urls = await axios.all(subRequest);
@@ -183,6 +183,20 @@ const deletePokemon = async (id) => {
   return "El Pokemon fue borrado exitosamente";
 };
 
+//Buscamos TODOS los nombres de los pokemons desde la api y la base de datos:
+const allNamesPokemons = async () => {
+  // *Los de la Base de Datos:
+  const dataBasePokemons = await Pokemon.findAll();
+  // *Los de la Api:
+  const request = await axios
+    .get("https://pokeapi.co/api/v2/pokemon?limit=150&offset=0")
+    .then((res) => res.data.results);
+
+  const namesBd = dataBasePokemons.map((item) => item.name);
+  const namesApi = request.map((item) => item.name);
+  return [...namesBd, ...namesApi];
+};
+
 module.exports = {
   createPokemon,
   getPokemonById,
@@ -192,4 +206,5 @@ module.exports = {
   updatePokemon,
   deletePokemon,
   getFromDatabase,
+  allNamesPokemons,
 };

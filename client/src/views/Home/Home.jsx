@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardsContainer from "../../components/CardsContainer/CardsContainer";
-import { getAllPokemons, clearHome } from "../../redux/actions";
+import { getAllPokemons, allNames } from "../../redux/actions";
 import Paginado from "../../components/Paginado/Paginado";
 import style from "./Home.module.css";
 import Filter from "../../components/Filter/Filter";
@@ -13,12 +13,13 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getAllPokemons());
-  }, [dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  function traerTodos(e) {
-    e.preventDefault();
-    dispatch(clearHome());
-  }
+  useEffect(() => {
+    dispatch(allNames());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const numPokemons = pokemons?.length;
   const poksXpage = 12;
@@ -26,13 +27,6 @@ export default function Home() {
 
   return (
     <div className={style.contenedorHome}>
-      {pokemons.length === 1 ? (
-        <div>
-          <button className={style.recarga} onClick={(e) => traerTodos(e)}>
-            Traer todos
-          </button>
-        </div>
-      ) : null}
       {pokemons.length > 1 ? (
         <div className={style.iconFilter} onClick={() => setActive(!active)}>
           <svg

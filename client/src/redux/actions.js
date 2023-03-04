@@ -6,7 +6,6 @@ export const GET_ALL_TYPES = "GET_ALL_TYPES";
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
 export const DELETE_POKEMON = "DELETE_POKEMON";
 export const CLEAR_HOME = "CLEAR_HOME";
-export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
 export const FILTER_TYPE = "FILTER_TYPE";
 export const FILTER_ORIGEN = "FILTER_ORIGEN";
 export const ORDEN_ALFABETICO = "ORDEN_ALFABETICO";
@@ -14,12 +13,21 @@ export const ORDEN_ATAQUE = "ORDEN_ATAQUE";
 export const GET_UPDATE_POKEMON = "GET_UPDATE_POKEMON";
 export const CLEAR_UPDATE = "CLEAR_UPDATE";
 export const UPDATE_HOME = "UPDATE_HOME";
+export const ALL_NAMES = "ALL_NAMES";
 
 export const getAllPokemons = () => {
   return async function (dispatch) {
     const apidata = await axios.get("/pokemons");
     const pokemons = apidata.data;
     dispatch({ type: GET_ALL_POKEMONS, payload: pokemons });
+  };
+};
+
+export const allNames = () => {
+  return async function (dispatch) {
+    const apidata = await axios.get("/pokemons/names");
+    const names = apidata.data;
+    dispatch({ type: ALL_NAMES, payload: names });
   };
 };
 
@@ -48,15 +56,15 @@ export const clearDetail = () => {
 
 export const createPokemon = (data) => {
   return async function (dispatch) {
-    const create = await axios.post("/pokemons", data)
-    return create
+    const create = await axios.post("/pokemons", data);
+    return create;
   };
 };
 
 export const updatePokemon = (data) => {
   return async function (dispatch) {
-    const update = await axios.put("/pokemons", data)
-    return update
+    const update = await axios.put("/pokemons", data);
+    return update;
   };
 };
 
@@ -70,14 +78,6 @@ export const deletePokemon = (id) => {
 export const clearHome = () => {
   return {
     type: CLEAR_HOME,
-  };
-};
-
-export const searchByName = (name) => {
-  return async function (dispatch) {
-    const apiData = await axios.get(`/pokemons?name=${name}`);
-    const detail = apiData.data;
-    dispatch({ type: SEARCH_BY_NAME, payload: detail });
   };
 };
 

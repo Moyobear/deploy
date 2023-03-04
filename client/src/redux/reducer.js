@@ -5,7 +5,6 @@ import {
   GET_POKEMON_DETAIL,
   CLEAR_HOME,
   UPDATE_HOME,
-  SEARCH_BY_NAME,
   DELETE_POKEMON,
   FILTER_TYPE,
   FILTER_ORIGEN,
@@ -13,6 +12,7 @@ import {
   ORDEN_ATAQUE,
   GET_UPDATE_POKEMON,
   CLEAR_UPDATE,
+  ALL_NAMES,
 } from "./actions";
 
 const initialState = {
@@ -23,6 +23,7 @@ const initialState = {
   update: {},
   types: [],
   filtered: [],
+  names: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -32,6 +33,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         pokemons: action.payload,
         master: action.payload,
+      };
+    case ALL_NAMES:
+      return {
+        ...state,
+        names: action.payload,
       };
     case GET_POKEMON_DETAIL:
       return {
@@ -58,11 +64,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pokemons: [],
-      };
-    case SEARCH_BY_NAME:
-      return {
-        ...state,
-        pokemons: action.payload,
       };
     case DELETE_POKEMON:
       const filterDelete = state.pokemons.filter(

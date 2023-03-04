@@ -6,6 +6,7 @@ const {
   updatePokemon,
   deletePokemon,
   getFromDatabase,
+  allNamesPokemons,
 } = require("../controllers/pokemonsControllers");
 
 // *Acá vamos a tener todos los handlers del modelo Pokemon:
@@ -93,6 +94,15 @@ const getDatabaseHandler = async (req, res) => {
   }
 };
 
+const getNamesHandler = async (req, res) => {
+  try {
+    const request = await allNamesPokemons();
+    return res.status(200).send(request);
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+};
+
 module.exports = {
   getPokemonsHandler,
   getPokemonHandler,
@@ -100,4 +110,5 @@ module.exports = {
   updatePokemonsHandler,
   deletePokemonsHandler,
   getDatabaseHandler,
+  getNamesHandler,
 };

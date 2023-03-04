@@ -6,6 +6,7 @@ const {
   updatePokemonsHandler,
   deletePokemonsHandler,
   getDatabaseHandler,
+  getNamesHandler,
 } = require("../handlers/pokemonsHandlers");
 
 const {
@@ -17,6 +18,8 @@ const pokemonRouter = Router();
 
 // !ESTA RUTA SÓLO TRAE LOS POKEMONS DE LA BASE DE DATOS:
 pokemonRouter.get("/pokemondb", getDatabaseHandler);
+
+pokemonRouter.get("/names", getNamesHandler);
 
 pokemonRouter.get("/", getPokemonsHandler);
 
