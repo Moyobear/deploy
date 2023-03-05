@@ -1,25 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import CardsContainer from "../../components/CardsContainer/CardsContainer";
-import { getAllPokemons, allNames } from "../../redux/actions";
 import Paginado from "../../components/Paginado/Paginado";
 import style from "./Home.module.css";
 import Filter from "../../components/Filter/Filter";
 
 export default function Home() {
-  const dispatch = useDispatch();
   const pokemons = useSelector((state) => state.pokemons);
   const [active, setActive] = useState(false);
-
-  useEffect(() => {
-    dispatch(getAllPokemons());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    dispatch(allNames());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const numPokemons = pokemons?.length;
   const poksXpage = 12;

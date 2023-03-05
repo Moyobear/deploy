@@ -32,10 +32,9 @@ export const allNames = () => {
 };
 
 export const getPokemonDetail = (id) => {
-  return async function (dispatch) {
-    const apidata = await axios.get(`/pokemons/${id}`);
-    const detail = apidata.data;
-    dispatch({ type: GET_POKEMON_DETAIL, payload: detail });
+  return {
+    type: GET_POKEMON_DETAIL,
+    payload: id,
   };
 };
 

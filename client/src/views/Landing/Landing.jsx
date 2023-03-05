@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from "./Landing.module.css";
 import { Link } from "react-router-dom";
 import gengar from "../../Imgs/LandingGalery/gengar.png";
@@ -11,8 +11,16 @@ import gengar7 from "../../Imgs/LandingGalery/gengar7.png";
 import gengar8 from "../../Imgs/LandingGalery/gengar8.png";
 import gengar9 from "../../Imgs/LandingGalery/gengar9.png";
 import gengar10 from "../../Imgs/LandingGalery/gengar10.png";
+import { useDispatch } from "react-redux";
+import { getAllPokemons, allNames } from "../../redux/actions";
 
 export default function Landing() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllPokemons());
+    dispatch(allNames());
+  }, [dispatch]);
   return (
     <div className={style.landingContenedor}>
       <div className={style.texto}>
