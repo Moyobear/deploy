@@ -5,12 +5,27 @@ import style from "./Form.module.css";
 import { getAllTypes, updateHome, createPokemon } from "../../redux/actions";
 import Loadding from "../../components/Loadding/Loadding";
 import Modal from "../../components/Modal/Modal";
-import validate from "./validations";
+// import validate from "./validations";
 
 export default function Form() {
   const [image, setImage] = useState("");
   const dispatch = useDispatch();
   const types = useSelector((state) => state.types);
+  const advertencias = useSelector((state) => state.names);
+
+  function validate(input) {
+    let errors = {};
+    if (!/[A-Za-z]{3,10}/.test(input.name))
+      errors.name = "El nombre debe tener de 3 a 10 caracteres";
+    if (/[0-9]/.test(input.name))
+      errors.name = "El nombre no puede tener números";
+    if (advertencias.includes(input.name)) errors.name = "El nombre ya existe";
+    if (input.type === "") errors.type = "El tipo del pokemon es requerido";
+    if (input.type.length > 2)
+      errors.type = "El pokemón sólo puede tener máximo 2 tipos";
+
+    return errors;
+  }
 
   const [active, setActive] = useState(false);
   let motivo = "creado";
