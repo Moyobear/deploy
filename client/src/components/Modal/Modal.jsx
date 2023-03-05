@@ -1,12 +1,16 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import style from "./Modal.module.css";
+import { getAllPokemons } from "../../redux/actions";
 
 export default function Modal({ active, setActive, motivo }) {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   function closeModal(active) {
     setActive(!active);
+    dispatch(getAllPokemons())
     history.push("/home");
   }
   return (

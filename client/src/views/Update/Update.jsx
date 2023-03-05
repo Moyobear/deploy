@@ -6,7 +6,6 @@ import Loadding from "../../components/Loadding/Loadding";
 import {
   getUpdatePokemon,
   clearUpdate,
-  updateHome,
   updatePokemon,
 } from "../../redux/actions";
 import style from "./Update.module.css";
@@ -61,8 +60,6 @@ export default function Update() {
       height: 50,
       weight: 50,
     });
-
-    dispatch(updateHome());
   }
 
   return (

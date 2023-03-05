@@ -69,7 +69,8 @@ const rootReducer = (state = initialState, action) => {
     case UPDATE_HOME:
       return {
         ...state,
-        pokemons: [],
+        pokemons: action.payload,
+        master: action.payload,
       };
     case DELETE_POKEMON:
       const filterDelete = state.pokemons.filter(

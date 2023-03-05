@@ -109,8 +109,10 @@ export const ordenAtaque = (value) => {
 };
 
 export const updateHome = () => {
-  return {
-    type: UPDATE_HOME,
+  return async function (dispatch) {
+    const apidata = await axios.get("/pokemons");
+    const pokemons = apidata.data;
+    dispatch({ type: UPDATE_HOME, payload: pokemons });
   };
 };
 

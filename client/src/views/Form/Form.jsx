@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import pokebola from "../../Imgs/pokeball.png";
 import style from "./Form.module.css";
-import { getAllTypes, updateHome, createPokemon } from "../../redux/actions";
+import {
+  getAllTypes,
+  getAllPokemons,
+  createPokemon,
+} from "../../redux/actions";
 import Loadding from "../../components/Loadding/Loadding";
 import Modal from "../../components/Modal/Modal";
 // import validate from "./validations";
@@ -113,8 +117,6 @@ export default function Form() {
         name: "",
         type: "",
       });
-
-      dispatch(updateHome());
     }
   }
 
